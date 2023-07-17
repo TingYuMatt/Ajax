@@ -1,0 +1,86 @@
+﻿@model Msit147Site.Models.Members
+
+<h4>Members</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Homework3">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            <div class="form-group" >
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger" id="result"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Age" class="control-label"></label>
+                <input asp-for="Age" class="form-control" />
+                <span asp-validation-for="Age" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FileName" class="control-label"></label>
+                <input asp-for="FileName" class="form-control" />
+                <span asp-validation-for="FileName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FileData" class="control-label"></label>
+                <input asp-for="FileData" class="form-control" />
+                <span asp-validation-for="FileData" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+
+@section Scripts{
+    <script>
+        //先找到要控制的對象
+        const txtAcount = document.querySelector('#Name');
+
+        //在甚麼的行為下
+        txtAcount.addEventListener('blur', () => { //離開焦點時觸發事件
+            //要做甚麼事=>透過XMLHttpRequest物件對伺服器發出要求(Request)以及接受伺服器回應(Response)的資料
+            //第一步 建立Ajaxs物件
+            const xhr = new XMLHttpRequest();
+            //第二步 對伺服器發出要求
+            xhr.open('GET', `/api/CheckAcount?name=${txtAcount.value}`);
+            xhr.send();
+            console.log(txtAcount.value)
+            //第三步 接受伺服器回應(Response)的資料
+            //load事件表示伺服器已經回應資料了
+            xhr.addEventListener('load', () => {
+            //接收資料
+            const datas = JSON.parse(xhr.responseText);
+            console.log(datas)
+           
+                if (datas)
+                {
+                    document.querySelector('#result').innerHTML = "此帳號存在"
+                }
+                else {
+
+                    return null;
+                }
+           
+        })
+           
+
+        })
+    </script>
+}
+
+@section Styles{
+
+}

@@ -1,0 +1,54 @@
+﻿@{
+    ViewData["Title"] = "Homework2";
+}
+
+<h1>Homework2</h1>
+
+<div class="container">
+    <div id="thePlaces" class="row row-cols-4">
+    </div>
+</div>
+
+
+
+@section Scripts
+    {
+
+    <script src="~/js/Travel.js"></script>
+
+    <script>
+        console.log(spots.CommonFormat.Section[0].file.img[0].text)
+        console.log(spots);
+        const datas = spots.CommonFormat.Section.map(thePlace => {
+
+            const { stitle, xbody, address,file} = thePlace
+
+            let imageName = "";
+            imageName = (file.img.length > 0) ? file.img[0].text : file.img.text;
+            
+            //{
+            //    imageName = file.img[0].text;
+            //}
+            //else 
+            //{
+            //    imageName = thePlace.file.img.text;
+            //}
+
+            const a = 
+            `
+               <div class="card" style="width: 18rem;">
+               <img src="${imageName}" class="card-img-top" alt="..."></img>
+               <div class="card-body">
+               <h5 class="card-title">${stitle}</h5>
+               <p class="card-text">${xbody.substring(0,99)}</p>
+               <p class="card-text">${address}</p>
+               </div>
+               </div>
+            `
+            return a;
+
+        })
+
+        document.querySelector('#thePlaces').innerHTML = datas.join("");
+    </script>
+    }

@@ -1,0 +1,112 @@
+﻿@{
+    ViewData["Title"] = "Homework1";
+}
+
+<h1>Homework1</h1>
+
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+    <table id="employeesTable" class="table table-bordered">
+        <thead>
+            <tr>
+                <th>姓名</th>
+                <th>年資</th>
+                <th>薪水</th>
+            </tr>
+        </thead>
+        <tbody id="tbody">
+            @*  <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            </tr>
+            <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            </tr>
+            <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            </tr>*@
+
+        </tbody>
+    </table>
+</div>
+
+
+
+
+@section Scripts
+    {
+    <script>
+
+        const emps = [{ "name": "Tom", "workYears": 3, "salary": 35000 },
+        { "name": "Jack", "workYears": 5, "salary": 40000 },
+        { "name": "Mary", "workYears": 7, "salary": 45000 }];
+
+        console.log(emps[0].name)
+        for (let i = 0, max = emps.length; i < max; i++) {
+            console.log(emps[i].name)
+            console.log(emps[i].workYears)
+            console.log(emps[i].salary)
+        }
+        const emp = {
+            "employees": [
+                { "name": "Tom", "workYears": 3, "salary": 35000 },
+                { "name": "Jack", "workYears": 5, "salary": 40000 },
+                { "name": "Mary", "workYears": 7, "salary": 45000 }
+            ]
+        }
+        for (let i = 0, max = emp.employees.length; i < max; i++) {
+            console.log(emp.employees[i])
+        }
+        emp.employees.forEach((theEmp, idx, datas) => {
+            console.log(theEmp)
+            console.log(idx)
+            console.log(datas)
+
+        })
+        emp.employees.forEach(theEmp => {
+            const { name, workYears, salary } = theEmp
+
+            console.log(theEmp);
+
+        })
+
+        //$("#tbody>tr>td:eq(0)").text(emp.employees[0].name)
+        //$("#tbody>tr>td:eq(1)").text(emp.employees[0].workYears)
+        //$("#tbody>tr>td:eq(2)").text(emp.employees[0].salary)
+
+        //$("#tbody>tr:eq(1)>td:eq(0)").text(emp.employees[1].name)
+        //$("#tbody>tr:eq(1)>td:eq(1)").text(emp.employees[1].workYears)
+        //$("#tbody>tr:eq(1)>td:eq(2)").text(emp.employees[1].salary)
+
+        //$("#tbody>tr:eq(2)>td:eq(0)").text(emp.employees[2].name)
+        //$("#tbody>tr:eq(2)>td:eq(1)").text(emp.employees[2].workYears)
+        //$("#tbody>tr:eq(2)>td:eq(2)").text(emp.employees[2].salary)
+
+
+
+
+        const datas = emp.employees.map(theEmp => {
+            const { name, workYears, salary } = theEmp;
+            return (
+                `<tr>
+                                 <td>${name}</td>
+                                 <td>${workYears}</td>
+                                 <td>${salary}</td>
+                                 </tr>
+                        `
+            )
+        })
+
+        $("#tbody").append(datas.join(""));
+
+
+    </script>
+    }
